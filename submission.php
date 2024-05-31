@@ -3,7 +3,7 @@ include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];
-    
+
     // Simple captcha check
     if ($_POST['captcha'] != '5') {
         $errors[] = "Captcha failed!";
@@ -67,12 +67,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Animal Submission Form</title>
+    <style>
+        .radio-group {
+            display: flex;
+        }
+
+        .radio-group div {
+            margin-right: 20px;
+            /* Adjust spacing between radio buttons */
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -92,21 +104,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="submission.php" method="post" enctype="multipart/form-data">
             <h3>Animal Information</h3>
             <label for="name">Name of the animal:</label>
-            <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
+            <input type="text" id="name" name="name"
+                value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
 
             <label>Category:</label>
-            <input type="radio" id="herbivores" name="category" value="herbivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'herbivores') ? 'checked' : ''; ?> required>
-            <label for="herbivores">Herbivores</label>
-            <input type="radio" id="omnivores" name="category" value="omnivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'omnivores') ? 'checked' : ''; ?> required>
-            <label for="omnivores">Omnivores</label>
-            <input type="radio" id="carnivores" name="category" value="carnivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'carnivores') ? 'checked' : ''; ?> required>
-            <label for="carnivores">Carnivores</label>
+            <div class="radio-group">
+                <div>
+                    <input type="radio" id="herbivores" name="category" value="herbivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'herbivores') ? 'checked' : ''; ?> required>
+                    <label for="herbivores">Herbivores</label>
+                </div>
+                <div>
+                    <input type="radio" id="omnivores" name="category" value="omnivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'omnivores') ? 'checked' : ''; ?> required>
+                    <label for="omnivores">Omnivores</label>
+                </div>
+                <div>
+                    <input type="radio" id="carnivores" name="category" value="carnivores" <?php echo (isset($_POST['category']) && $_POST['category'] == 'carnivores') ? 'checked' : ''; ?> required>
+                    <label for="carnivores">Carnivores</label>
+                </div>
+            </div>
 
             <label for="image">Image:</label>
             <input type="file" id="image" name="image" accept="image/*" required>
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" required><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
+            <textarea id="description" name="description"
+                required><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
 
             <label for="life_expectancy">Life expectancy:</label>
             <select id="life_expectancy" name="life_expectancy" required>
@@ -118,10 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </select>
 
             <label for="captcha">Captcha: What is 3 + 2?</label>
-            <input type="text" id="captcha" name="captcha" value="<?php echo isset($_POST['captcha']) ? htmlspecialchars($_POST['captcha']) : ''; ?>" required>
+            <input type="text" id="captcha" name="captcha"
+                value="<?php echo isset($_POST['captcha']) ? htmlspecialchars($_POST['captcha']) : ''; ?>" required>
 
             <input type="submit" value="Submit">
         </form>
     </div>
 </body>
+
 </html>
