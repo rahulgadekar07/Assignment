@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Animal Listing</title>
     <style>
-        /* Style for the link/button */
+        /* Style for the button */
         .submit-link {
             display: block;
             text-align: center;
@@ -79,9 +79,9 @@
             $visitor_count = $visitor_row['count'];
         }
 
-        // Check if the visitor has been counted in this session
+        // Check if the visitor counted in this session
         if (!isset($_COOKIE['visitor'])) {
-            // Increment visitor count in the database and set a cookie for 1 day
+            // Increment visitor count in  database and setcookie for 1 day
             $visitor_count++;
             $conn->query("UPDATE visitor_count SET count = $visitor_count");
             setcookie('visitor', '1', time() + 86400, '/'); // 86400 seconds = 1 day

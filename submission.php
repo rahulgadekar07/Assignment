@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         .radio-group div {
             margin-right: 20px;
-            /* Adjust spacing between radio buttons */
         }
     </style>
 </head>
